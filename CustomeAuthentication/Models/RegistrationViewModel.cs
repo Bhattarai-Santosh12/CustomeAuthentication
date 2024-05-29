@@ -27,7 +27,7 @@ namespace CustomeAuthentication.Models
         [Required(ErrorMessage = "password Name Required")]
         [StringLength(100, MinimumLength =5, ErrorMessage = "More then 20 character")]
         [DataType(DataType.Password)]
-        public int Password { get; set; }
+        public int  Password { get; set; }
         [Compare("Password", ErrorMessage ="Please enter valid password")]
         [DataType(DataType.Password)]
 
