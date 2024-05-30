@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomeAuthentication.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240529105252_update")]
-    partial class update
+    [Migration("20240530043610_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

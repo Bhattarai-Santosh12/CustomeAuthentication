@@ -50,6 +50,7 @@ namespace CustomeAuthentication.Controllers
                     _context.SaveChanges();
 
                     ModelState.Clear();
+                    ViewBag.message= $"{account.FirstName} {account.LastName} register successful";
                 }
                 catch (DbUpdateException)
                 {
@@ -86,7 +87,7 @@ namespace CustomeAuthentication.Controllers
 
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                    return RedirectToAction("SecurityPage");
+                    return RedirectToAction("SecurePage");
                 }
                 else
                 {
@@ -104,7 +105,7 @@ namespace CustomeAuthentication.Controllers
         }
 
         [Authorize]
-        public IActionResult SecurityPage()
+        public IActionResult SecurePage()
         {
             ViewBag.Name = HttpContext.User.Identity.Name;
             return View();
