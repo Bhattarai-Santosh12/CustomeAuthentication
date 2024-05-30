@@ -29,6 +29,6 @@ namespace CustomeAuthentication.Entities
 
         [Required(ErrorMessage = "password Name Required")]
         [MaxLength(100, ErrorMessage = "More then 20 character")]
-        public int Password { get; set; }
+        public string Password { get; set; }
     }
 }
