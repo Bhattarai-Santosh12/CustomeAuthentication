@@ -57,7 +57,7 @@ namespace CustomeAuthentication.Controllers
                     ModelState.AddModelError("", "Please enter a unique email or username.");
                 }
             }
-
+            TempData["ShowAlert"] = true;
             return View(model);
         }
 

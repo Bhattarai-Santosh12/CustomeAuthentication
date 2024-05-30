@@ -4,7 +4,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li>Hello, @Context.User.Identity.Name!</li>
             <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
+                <button type="submit" class="btn btn-link navbar-btn navbar-link" asp-controller="AccountController1" asp-action="Logout">Logout</button>
             </li>
         </ul>
     </form>
