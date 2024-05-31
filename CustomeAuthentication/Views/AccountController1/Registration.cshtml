@@ -1,5 +1,4 @@
 ﻿@model CustomeAuthentication.Models.RegistrationViewModel
-
 @{
     ViewData["Title"] = "Registration";
 }
@@ -9,7 +8,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Registration">
+        <form asp-action="Registration" asp-controller="AccountController1" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
@@ -31,6 +30,17 @@
                 <input asp-for="UserName" class="form-control " />
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
+            @* for assigning roles *@
+
+            <div class="input-group mb-3 mt-3">
+                <label class="input-group-text"  asp-for="Roles">Options</label>
+                <select class="form-select" id="inputGroupSelect01" asp-for="Roles">
+                    <option selected>Choose...</option>
+                    <option value="admin">Admin</option>
+                    <option value="customer">Customer </option>
+                </select>
+            </div>
+
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
                 <input asp-for="Password" class="form-control " />
@@ -42,7 +52,7 @@
                 <span asp-validation-for="ConformPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Register" class="btn btn-primary m-3" onclick="register()" asp-action="Login"/>
+                <input type="submit" value="Register" class="btn btn-primary m-3" />
             </div>
         </form>
     </div>
@@ -54,15 +64,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>
-        function register() {
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Account Created Succesfully",
-                showConfirmButton: false,
-                timer: 1500
-            });
-        }
-    </script>
+    
 }

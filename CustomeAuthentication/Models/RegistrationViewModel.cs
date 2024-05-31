@@ -22,6 +22,8 @@ namespace CustomeAuthentication.Models
      
         public string UserName { get; set; }
 
+        [Required(ErrorMessage = "Roles is Required")]
+        public string Roles { get; set; }
 
         [Required(ErrorMessage = "password Name Required")]
         [DataType(DataType.Password)]

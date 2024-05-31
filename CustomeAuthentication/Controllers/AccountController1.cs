@@ -9,10 +9,13 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Threading.Tasks;
 using System.Linq;
 
+
+
 namespace CustomeAuthentication.Controllers
 {
     public class AccountController1 : Controller
     {
+
         private readonly AppDbContext _context;
 
         public AccountController1(AppDbContext appDbContext)
@@ -20,7 +23,7 @@ namespace CustomeAuthentication.Controllers
             _context = appDbContext;
         }
 
-        public IActionResult Index()
+        public IActionResult Index() 
         {
             return View(_context.UserAccounts.ToList());
         }
@@ -41,7 +44,8 @@ namespace CustomeAuthentication.Controllers
                     LastName = model.LastName,
                     Email = model.Email,
                     Password = model.Password,
-                    UserName = model.UserName
+                    UserName = model.UserName,
+                    Roles=model.Roles
                 };
 
                 try
@@ -57,7 +61,7 @@ namespace CustomeAuthentication.Controllers
                     ModelState.AddModelError("", "Please enter a unique email or username.");
                 }
             }
-            TempData["ShowAlert"] = true;
+           
             return View(model);
         }
 
@@ -80,7 +84,7 @@ namespace CustomeAuthentication.Controllers
                     {
                         new Claim(ClaimTypes.Name, user.Email),
                         new Claim("Name", user.FirstName),
-                        new Claim(ClaimTypes.Role, "user")
+                        new Claim(ClaimTypes.Role, user.Roles)
                     };
 
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -101,7 +105,7 @@ namespace CustomeAuthentication.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "AccountController1");
         }
 
         [Authorize]
@@ -110,5 +114,17 @@ namespace CustomeAuthentication.Controllers
             ViewBag.Name = HttpContext.User.Identity.Name;
             return View();
         }
+
+        [Authorize(Roles = "admin")]
+public IActionResult AdminOnly()
+{
+    return View();
+}
+
+[Authorize(Roles = "customer")]
+public IActionResult UserOnly()
+{
+    return View();
+}
     }
 }
